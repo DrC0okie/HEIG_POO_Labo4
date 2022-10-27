@@ -4,33 +4,41 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Program {
+    private static final char ZERO_ASCII = '0', MINUS_ASCII = '-', PLUS_ASCII = '+';
     public static void main(String[] args) {
         String[] test = new String[]{"42", "-55", "+14567"};
         int[] shuffledArray = new int[test.length];
         shuffledArray = getArgumentsToInt(test);
-
-        int[] array = new int[]{2, 4, 6, 8, 7, 5, 3, 1};
-        quickSort(array, 0, array.length);
-        System.out.println(Arrays.toString(array));
+        quickSort(shuffledArray, 0, shuffledArray.length);
+        System.out.println(Arrays.toString(shuffledArray));
 
     }
 
-    private static int[] getArgumentsToInt(String[] args) throws RuntimeException {
-        boolean isNegative = false;
-        int[] numbers = new int[args.length];
-        for (int i = 0; i < args.length; i++) {
-            int number = 0;
-            for (int j = args[i].length() - 1, k = 0; j >= 0; j--, k++) {
-                if (args[i].charAt(k) == '-' || args[i].charAt(k) == '+') {
-                    k++;
-                    j--;
-                    isNegative = args[i].charAt(0) == '-';
-                }
-                number += ((args[i].charAt(k) - 48) * Math.pow(10, j));
+    private static int[] getArgumentsToInt(String[] str) throws RuntimeException {
+        int[] numbers = new int[str.length];
+        for (int i = 0; i < str.length; i++) {
+            String currentString = str[i];
+            char firstChar = currentString.charAt(0);
+
+            // Remove the first char if '-' or '+'
+            if (firstChar == MINUS_ASCII || firstChar == PLUS_ASCII)
+                currentString = currentString.substring(1);
+
+            for (int j = currentString.length() - 1, k = 0; j >= 0; j--, k++) {
+                char currentChar = currentString.charAt(k);
+                //Convert the char to int value
+                numbers[i] += (charToInt(currentChar) * Math.pow(10, j));
             }
-            numbers[i] = isNegative ? -number : number;
+            numbers[i] = firstChar == MINUS_ASCII ? -numbers[i] : numbers[i];
         }
         return numbers;
+    }
+
+    static private int charToInt(char c)throws RuntimeException{
+        if(c > ZERO_ASCII && c < ZERO_ASCII + 9)
+            return c - ZERO_ASCII;
+        else throw new RuntimeException(
+                "Cannot convert " + c + " to an integer value");
     }
 
     private static final Random generator = new Random();
