@@ -52,4 +52,12 @@ public class Int{
     public String toString(){
         return "" + value;
     }
+
+    public void swap(Int other) throws RuntimeException{
+        if(other == null)
+            throw new RuntimeException("The given Int is null");
+        int tmp = other.getValue();
+        other.setValue(this.value);
+        this.value = tmp;
+    }
 }

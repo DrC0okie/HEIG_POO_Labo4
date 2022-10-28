@@ -1,6 +1,6 @@
 package ch.heigvd.Program2;
-import ch.heigvd.Int.Int;
 
+import ch.heigvd.Int.Int;
 import java.lang.Math;
 import java.util.Arrays;
 
@@ -11,13 +11,13 @@ public class Program2 {
         Int[] inputArray = new Int[args.length];
         try{
             inputArray = getArgumentsToInt(args);
+            bubbleSort(inputArray);
         }
         catch(RuntimeException e){
             e.printStackTrace();
             System.err.println("The program will exit.");
             System.exit(-1);
         }
-        bubbleSort(inputArray);
         System.out.println("Sorted arguments : " + Arrays.toString(inputArray));
     }
 
@@ -58,7 +58,7 @@ public class Program2 {
                 "Cannot convert '" + c + "' to an integer value");
     }
 
-    private static void bubbleSort(Int[] data){
+    private static void bubbleSort(Int[] data)throws RuntimeException{
         if (data != null) {
             boolean finished = false;
             int size = data.length;
@@ -66,7 +66,10 @@ public class Program2 {
                 finished = true;
                 for (int i = 0; i < size - 1; ++i) {
                     if (data[i].getValue() > data[i + 1].getValue()) {
-                        swap(data, i, i + 1);
+                        //Do 3 swaps to prove that the 3 methods are working
+                        swapValues(data, i, i + 1);
+                        swapObjects(data, i, i + 1);
+                        data[i].swap(data[i + 1]);
                         finished = false;
                     }
                 }
@@ -75,10 +78,17 @@ public class Program2 {
         }
     }
 
-    private static void swap(Int[] data, int a, int b) {
+    //Swaps the value of 2 objects of the array
+    private static void swapValues(Int[] data, int a, int b) {
         int temp = data[a].getValue();
         data[a].setValue(data[b].getValue());
         data[b].setValue(temp);
     }
-}
 
+    //Swaps the reference of 2 objects of the array
+    private static void swapObjects(Int[] data, int a, int b) {
+        Int temp = data[a];
+        data[a] = data[b];
+        data[b] = temp;
+    }
+}
