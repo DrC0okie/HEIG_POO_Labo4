@@ -5,14 +5,23 @@ import java.util.Arrays;
 public class Program {
     private static final char ZERO_ASCII = '0', MINUS_ASCII = '-', PLUS_ASCII = '+';
     public static void main(String[] args) {
-        String[] test = new String[]{"42", "-55", "+14567"};
-        int[] shuffledArray = new int[test.length];
-        shuffledArray = getArgumentsToInt(test);
-        bubbleSort(shuffledArray);
-        System.out.println(Arrays.toString(shuffledArray));
+        System.out.println("Input arguments : " + Arrays.toString(args));
+        int[] inputArray = new int[args.length];
+        try{
+            inputArray = getArgumentsToInt(args);
+        }
+        catch(RuntimeException e){
+            e.printStackTrace();
+            System.err.println("The program will exit.");
+            System.exit(-1);
+        }
+        bubbleSort(inputArray);
+        System.out.println("Sorted arguments : " + Arrays.toString(inputArray));
     }
 
     private static int[] getArgumentsToInt(String[] str) throws RuntimeException {
+        if(str == null)
+            throw new RuntimeException("The given array is null");
         int[] numbers = new int[str.length];
         for (int i = 0; i < str.length; i++) {
             String currentString = str[i];
@@ -27,6 +36,7 @@ public class Program {
                 //Convert the char to int value
                 numbers[i] += (charToInt(currentChar) * Math.pow(10, j));
             }
+            //handles the negative sign of the number
             numbers[i] = firstChar == MINUS_ASCII ? -numbers[i] : numbers[i];
         }
         return numbers;
@@ -36,10 +46,10 @@ public class Program {
         if(c > ZERO_ASCII && c < ZERO_ASCII + 9)
             return c - ZERO_ASCII;
         else throw new RuntimeException(
-                "Cannot convert " + c + " to an integer value");
+                "Cannot convert '" + c + "' to an integer value");
     }
 
-    private static void bubbleSort(int[] data) {
+    private static void bubbleSort(int[] data){
         if (data != null) {
             boolean finished = false;
             int size = data.length;
