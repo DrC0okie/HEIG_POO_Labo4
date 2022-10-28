@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Program {
     private static final char ZERO_ASCII = '0', MINUS_ASCII = '-', PLUS_ASCII = '+';
-    public static void main(String[] args) {
+    public static void main(String[] args){
         System.out.println("Input arguments : " + Arrays.toString(args));
         int[] inputArray = new int[args.length];
         try{
@@ -43,7 +43,7 @@ public class Program {
     }
 
     static private int charToInt(char c)throws RuntimeException{
-        if(c > ZERO_ASCII && c < ZERO_ASCII + 9)
+        if(c >= ZERO_ASCII && c <= ZERO_ASCII + 9)
             return c - ZERO_ASCII;
         else throw new RuntimeException(
                 "Cannot convert '" + c + "' to an integer value");
