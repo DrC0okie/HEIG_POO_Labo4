@@ -1,24 +1,23 @@
-package ch.heigvd;
+package ch.heigvd.Int;
 
-public class Int {
+public class Int{
     //Attribut
     private int value;
-
 
     //Method
     /***
      * Constructor without parameter who set value to 0
      */
     public Int(){
-        value = 0;
+        this.value = 0;
     }
 
     /***
      * Constructor with parameter who set the value used in parameter
-     * @param aValue    Integer value used to set at the creation
+     * @param value    Integer value used to set at the creation
      */
-    public Int(int aValue){
-        value = aValue;
+    public Int(int value){
+        this.value = value;
     }
 
     /***
@@ -31,16 +30,25 @@ public class Int {
 
     /***
      * Method to set the new value of this object
-     * @param aValue    Integer value used to set the new value
+     * @param value    Integer value used to set the new value
      */
-    public void setValue(int aValue){
-        value = aValue;
+    public void setValue(int value){
+        this.value = value;
+    }
+
+    /***
+     * Method to set the new value of this object
+     * @param value    Double value used to set the new value
+     */
+    public void setValue(double value){
+        this.value = (int)value;
     }
 
     /***
      * Method to convert the value to string
      * @return  the value as a string
      */
+    @Override
     public String toString(){
         return "" + value;
     }
