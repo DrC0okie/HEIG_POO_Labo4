@@ -1,61 +1,51 @@
+/*−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−------------------------------------------------
+File name       : Int.java
+Author(s)       : Kévin Farine, Timothée Van Hove
+Date création   : 20.10.2022
+Description     : Wrapper class who provide a way to use primitive integer as object
+JDK             : OpenJDK Runtime Environment Temurin-17.0.5+8 (build 17.0.5+8)
+−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−------------------------------------------------*/
 package ch.heigvd.Int;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Int{
-    //Attribut
+    // Internal value of the wrapper class
     private int value;
 
-    //Method
-    /***
-     * Constructor without parameter who set value to 0
-     */
+    /** Constructor without parameter who set value to 0 */
     public Int(){
         this.value = 0;
     }
 
-    /***
-     * Constructor with parameter who set the value used in parameter
-     * @param value    Integer value used to set at the creation
-     */
+    /** Constructor with parameter who set the value used in parameter
+     * @param value Integer value used to set at the creation */
     public Int(int value){
         this.value = value;
     }
 
-    /***
-     * Method to get the Integer value in this object
-     * @return an integer
-     */
+    /** Method to get the Integer value in this object
+     * @return an integer */
     public int getValue(){
         return value;
     }
 
-    /***
-     * Method to set the new value of this object
-     * @param value    Integer value used to set the new value
-     */
+    /** Method to set the new value of this object
+     * @param value Integer value used to set the new value */
     public void setValue(int value){
         this.value = value;
     }
 
-    /***
-     * Method to set the new value of this object
-     * @param value    Double value used to set the new value
-     */
-    public void setValue(double value){
-        this.value = (int)value;
-    }
-
-    /***
-     * Method to convert the value to string
-     * @return  the value as a string
-     */
+    /** Method to convert the value to string
+     * @return  the value as a string */
     @Override
     public String toString(){
         return "" + value;
     }
 
-    public void swap(Int other) throws RuntimeException{
-        if(other == null)
-            throw new RuntimeException("The given Int is null");
+    /** Swaps the value of the given object with the value of this object
+     * @param other the other instance of this class to swap the value with */
+    public void swap(@NotNull Int other){
         int tmp = other.getValue();
         other.setValue(this.value);
         this.value = tmp;
