@@ -29,8 +29,8 @@ public class Program1 {
         System.out.println("Sorted arguments : " + Arrays.toString(inputArray));
     }
 
-    /** @brief Parses each String of an array as signed decimal integers
-     * @remark The characters in the string must be decimal digits or preceded
+    /** Parses each String of an array as signed decimal integers
+     * The characters in the string must be decimal digits or preceded
      * by a '+' or '-' sign.
      * @param str The String array to be parsed
      * @return An int array corresponding to the given string array
@@ -64,7 +64,7 @@ public class Program1 {
         return numbers;
     }
 
-    /** @brief Converts decimal digit characters to integer numbers
+    /** Converts decimal digit characters to integer numbers
      * @param c the character to be converted
      * @return the integer value corresponding to the given character
      * @throws RuntimeException When the given character is not a decimal digit */
@@ -75,7 +75,7 @@ public class Program1 {
                 "Cannot convert '" + c + "' to an integer value");
     }
 
-    /** @brief Standard bubbleSort algorithm
+    /** Standard bubbleSort algorithm
      * @param data The array of int to be sorted*/
     private static void bubbleSort(int[] data){
         if (data != null) {
@@ -94,7 +94,7 @@ public class Program1 {
         }
     }
 
-    /** @brief Swaps the value of 2 elements of an int array
+    /** Swaps the value of 2 elements of an int array
      * @param data the array in which to swap the values
      * @param index1 The location of the first element's value to be swapped
      * @param index2 The location of the second element's value to be swapped */
