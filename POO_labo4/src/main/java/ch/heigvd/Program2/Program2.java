@@ -13,7 +13,6 @@ package ch.heigvd.Program2;
 
 import ch.heigvd.Int.Int;
 import org.jetbrains.annotations.NotNull;
-
 import java.lang.Math;
 import java.util.Arrays;
 
@@ -116,7 +115,6 @@ public class Program2 {
         data[index1].setValue(data[index2].getValue());
         data[index2].setValue(temp);
     }
-
 
     /** Swaps the reference of 2 objects of the array
      * @param data the array in which to swap the objects

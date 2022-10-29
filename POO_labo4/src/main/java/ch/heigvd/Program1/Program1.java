@@ -9,6 +9,7 @@ JDK             : OpenJDK Runtime Environment Temurin-17.0.5+8 (build 17.0.5+8)
 
 package ch.heigvd.Program1;
 
+import org.jetbrains.annotations.NotNull;
 import java.lang.Math;
 import java.util.Arrays;
 
@@ -98,10 +99,9 @@ public class Program1 {
      * @param data the array in which to swap the values
      * @param index1 The location of the first element's value to be swapped
      * @param index2 The location of the second element's value to be swapped */
-    private static void swap(int[] data, int index1, int index2) {
+    private static void swap(int @NotNull [] data, int index1, int index2) {
         int temp = data[index1];
         data[index1] = data[index2];
         data[index2] = temp;
     }
 }
-
