@@ -7,8 +7,6 @@ JDK             : OpenJDK Runtime Environment Temurin-17.0.5+8 (build 17.0.5+8)
 −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−------------------------------------------------*/
 package ch.heigvd.Int;
 
-import org.jetbrains.annotations.NotNull;
-
 public class Int{
     // Internal value of the wrapper class
     private int value;
@@ -45,7 +43,7 @@ public class Int{
 
     /** Swaps the value of the given object with the value of this object
      * @param other the other instance of this class to swap the value with */
-    public void swap(@NotNull Int other){
+    public void swap(Int other){
         int tmp = other.getValue();
         other.setValue(this.value);
         this.value = tmp;

@@ -12,15 +12,15 @@ JDK             : OpenJDK Runtime Environment Temurin-17.0.5+8 (build 17.0.5+8)
 package ch.heigvd.Program2;
 
 import ch.heigvd.Int.Int;
-import org.jetbrains.annotations.NotNull;
 import java.lang.Math;
-import java.util.Arrays;
+import java.util.*;
 
 public class Program2 {
     private static final char ZERO_ASCII = '0', MINUS_ASCII = '-', PLUS_ASCII = '+';
     public static void main(String[] args){
-        System.out.println("Input arguments : " + Arrays.toString(args));
-        Int[] inputArray = new Int[args.length];
+        int length = args.length;
+        System.out.println("Input arguments as string : " + Arrays.toString(args));
+        Int[] inputArray = new Int[length];
         try{
             inputArray = getArgumentsToInt(args);
         }
@@ -29,8 +29,28 @@ public class Program2 {
             System.err.println("The program will exit.");
             System.exit(-1);
         }
-        bubbleSort(inputArray);
-        System.out.println("Sorted arguments : " + Arrays.toString(inputArray));
+
+        // Create a list of 3 slightly different arrays based on the input array
+        List<Int[]> arrays = new ArrayList<>();
+        for (int i = 0; i < 3; ++i){
+            Int[] tmp = new Int[length];
+            for(int j = 0; j < length; ++j){
+                //Add i to the value to differentiate each array from the others
+                //Except the first array
+                tmp[j] = new Int(inputArray[j].getValue() + (i * j));
+            }
+            arrays.add(tmp);
+            System.out.println("Array n° " + (i + 1) + " : " + Arrays.toString(tmp));
+        }
+
+        // We didn't find a way to dynamically call the 3 variant of bubbleSort
+        bubbleSortV1(arrays.get(0));
+        bubbleSortV2(arrays.get(1));
+        bubbleSortV3(arrays.get(2));
+
+        for(int i = 0; i < 3; ++i){
+            System.out.println("Sorted array n° " + (i + 1) + " : " + Arrays.toString(arrays.get(i)));
+        }
     }
 
     /** Parses each String of an array as signed decimal integers
@@ -84,9 +104,9 @@ public class Program2 {
                 "Cannot convert '" + c + "' to an integer value");
     }
 
-    /** BubbleSort algorithm using 3 different swapping methods
+    /** BubbleSort algorithm using a value swapping method
      * @param data The array of Int to be sorted*/
-    private static void bubbleSort(Int[] data){
+    private static void bubbleSortV1(Int[] data){
         if (data != null) {
             boolean finished = false;
             int size = data.length;
@@ -94,9 +114,44 @@ public class Program2 {
                 finished = true;
                 for (int i = 0; i < size - 1; ++i) {
                     if (data[i].getValue() > data[i + 1].getValue()) {
-                        //Do 3 swaps to prove that the 3 methods are working
                         swapValues(data, i, i + 1);
+                        finished = false;
+                    }
+                }
+                --size;
+            }
+        }
+    }
+
+    /** BubbleSort algorithm using an object swapping method
+     * @param data The array of Int to be sorted*/
+    private static void bubbleSortV2(Int[] data){
+        if (data != null) {
+            boolean finished = false;
+            int size = data.length;
+            while (!finished) {
+                finished = true;
+                for (int i = 0; i < size - 1; ++i) {
+                    if (data[i].getValue() > data[i + 1].getValue()) {
                         swapObjects(data, i, i + 1);
+                        finished = false;
+                    }
+                }
+                --size;
+            }
+        }
+    }
+
+    /** BubbleSort algorithm the internal Int.swap method
+     * @param data The array of Int to be sorted*/
+    private static void bubbleSortV3(Int[] data){
+        if (data != null) {
+            boolean finished = false;
+            int size = data.length;
+            while (!finished) {
+                finished = true;
+                for (int i = 0; i < size - 1; ++i) {
+                    if (data[i].getValue() > data[i + 1].getValue()) {
                         data[i].swap(data[i + 1]);
                         finished = false;
                     }
@@ -110,7 +165,7 @@ public class Program2 {
      * @param data the array in which to swap the values
      * @param index1 The location of the first element's value to be swapped
      * @param index2 The location of the second element's value to be swapped */
-    private static void swapValues(Int @NotNull [] data, int index1, int index2) {
+    private static void swapValues(Int[] data, int index1, int index2) {
         int temp = data[index1].getValue();
         data[index1].setValue(data[index2].getValue());
         data[index2].setValue(temp);
@@ -120,7 +175,7 @@ public class Program2 {
      * @param data the array in which to swap the objects
      * @param index1 The location of the first object to be swapped
      * @param index2 The location of the second object to be swapped */
-    private static void swapObjects(Int @NotNull [] data, int index1, int index2) {
+    private static void swapObjects(Int[] data, int index1, int index2) {
         Int temp = data[index1];
         data[index1] = data[index2];
         data[index2] = temp;
