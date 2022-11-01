@@ -2,7 +2,10 @@
 File name       : Program2.java
 Author(s)       : Kévin Farine, Timothée Van Hove
 Created         : 20 oct. 2022
-Description     : Program that sorts the given command line arguments as numbers
+Description     : Program that interprets the given command line arguments as
+                  numbers, store them in 3 separate arrays, then sorts each array
+                  with a bubbleSort algorithm that implements 3 different swapping
+                  methods.
 Remark(s)       : This program automatically closes after displaying the result.
                   This program uses a custom wrapping Int class to handle the
                   sorting algorithm
@@ -19,9 +22,11 @@ public class Program2 {
     private static final char ZERO_ASCII = '0', MINUS_ASCII = '-', PLUS_ASCII = '+';
     public static void main(String[] args){
         int length = args.length;
+        //Display the raw command line arguments
         System.out.println("Input arguments as string : " + Arrays.toString(args));
         Int[] inputArray = new Int[length];
         try{
+            //Parse the String array to retrieve the arguments as Int
             inputArray = getArgumentsToInt(args);
         }
         catch(RuntimeException e){
@@ -36,20 +41,24 @@ public class Program2 {
             Int[] tmp = new Int[length];
             for(int j = 0; j < length; ++j){
                 //Add i to the value to differentiate each array from the others
-                //Except the first array
                 tmp[j] = new Int(inputArray[j].getValue() + (i * j));
             }
+            //Add the arrays to a list
             arrays.add(tmp);
+
+            //Print the not yet sorted arrays
             System.out.println("Array n° " + (i + 1) + " : " + Arrays.toString(tmp));
         }
 
-        // We didn't find a way to dynamically call the 3 variant of bubbleSort
+        //Sort the 3 arrays
         bubbleSortV1(arrays.get(0));
         bubbleSortV2(arrays.get(1));
         bubbleSortV3(arrays.get(2));
 
         for(int i = 0; i < 3; ++i){
-            System.out.println("Sorted array n° " + (i + 1) + " : " + Arrays.toString(arrays.get(i)));
+            //Print the sorted arrays
+            System.out.println("Sorted array n° " + (i + 1) + " : "
+                    + Arrays.toString(arrays.get(i)));
         }
     }
 
