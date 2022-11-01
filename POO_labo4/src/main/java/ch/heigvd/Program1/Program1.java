@@ -14,30 +14,35 @@ import java.util.Arrays;
 
 public class Program1 {
     private static final char ZERO_ASCII = '0', MINUS_ASCII = '-', PLUS_ASCII = '+';
-    public static void main(String[] args){
-        System.out.println("Input arguments : " + Arrays.toString(args));
+
+    public static void main(String[] args) {
+        System.out.println("Input arguments as string : " + Arrays.toString(args));
         int[] inputArray = new int[args.length];
-        try{
+        try {
+            //Parse the String array to retrieve the arguments as int
             inputArray = getArgumentsToInt(args);
-        }
-        catch(RuntimeException e){
+        } catch (RuntimeException e) {
             e.printStackTrace();
             System.err.println("The program will exit.");
             System.exit(-1);
         }
+
         bubbleSort(inputArray);
         System.out.println("Sorted arguments : " + Arrays.toString(inputArray));
     }
 
-    /** Parses each String of an array as signed decimal integers
+    /**
+     * Parses each String of an array as signed decimal integers
      * The characters in the string must be decimal digits or preceded
      * by a '+' or '-' sign.
+     *
      * @param str The String array to be parsed
      * @return An int array corresponding to the given string array
      * @throws RuntimeException if at least one char in the string is not a decimal
-     * digits, or if the given array is null */
+     *                          digits, or if the given array is null
+     */
     private static int[] getArgumentsToInt(String[] str) throws RuntimeException {
-        if(str == null)
+        if (str == null)
             throw new RuntimeException("The given array is null");
 
         int[] numbers = new int[str.length];
@@ -64,20 +69,26 @@ public class Program1 {
         return numbers;
     }
 
-    /** Converts decimal digit characters to integer numbers
+    /**
+     * Converts decimal digit characters to integer numbers
+     *
      * @param c the character to be converted
      * @return the integer value corresponding to the given character
-     * @throws RuntimeException When the given character is not a decimal digit */
-    static private int charToInt(char c)throws RuntimeException{
-        if(c >= ZERO_ASCII && c <= ZERO_ASCII + 9)
+     * @throws RuntimeException When the given character is not a decimal digit
+     */
+    static private int charToInt(char c) throws RuntimeException {
+        if (c >= ZERO_ASCII && c <= ZERO_ASCII + 9)
             return c - ZERO_ASCII;
         else throw new RuntimeException(
                 "Cannot convert '" + c + "' to an integer value");
     }
 
-    /** Standard bubbleSort algorithm
-     * @param data The array of int to be sorted*/
-    private static void bubbleSort(int[] data){
+    /**
+     * Standard bubbleSort algorithm
+     *
+     * @param data The array of int to be sorted
+     */
+    private static void bubbleSort(int[] data) {
         if (data != null) {
             boolean finished = false;
             int size = data.length;
@@ -94,10 +105,13 @@ public class Program1 {
         }
     }
 
-    /** Swaps the value of 2 elements of an int array
-     * @param data the array in which to swap the values
+    /**
+     * Swaps the value of 2 elements of an int array
+     *
+     * @param data   the array in which to swap the values
      * @param index1 The location of the first element's value to be swapped
-     * @param index2 The location of the second element's value to be swapped */
+     * @param index2 The location of the second element's value to be swapped
+     */
     private static void swap(int[] data, int index1, int index2) {
         int temp = data[index1];
         data[index1] = data[index2];
